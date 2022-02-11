@@ -3,57 +3,66 @@ function computerPlay(){
     return moves[Math.floor(Math.random() * 3)];
 }
 
-function getUserMove(){
-    return prompt("Choose your move: Rock, Paper or Scissors").toLowerCase();
+function showRoundResult(playerMove, computerMove, winner, roundNumber) {
+    const playerMoveNode = document.getElementById("player-move");
+    const computerMoveNode = document.getElementById("computer-move");
+    const roundNumberNode = document.getElementById("round-number");
+    const winnerNode = document.getElementById("round-winner");
+
+    playerMoveNode.textContent = playerMove;
+    computerMoveNode.textContent = computerMove;
+    roundNumberNode.textContent = roundNumber;
+    winnerNode.textContent = winner;
 }
 
-function playRound(playerSelection, computerSelection){
+function updateGlobalScore(winner) {
+    if (winner === "tie") {
+        return ;
+    } else {
+        const scoreNode = document.getElementById(`${winner}-score`);
+        let newScore = Number(scoreNode.textContent) + 1;
+        scoreNode.textContent = newScore;
+        if (Number(scoreNode.textContent) === 5) {
+            const gameWinnerNode = document.getElementById("game-winner");
+            gameWinnerNode.textContent = winner.toUpperCase();
+            endGame();
+        }
+    }
+}
+
+function endGame(){
+    const buttons = document.querySelectorAll(".option");
+    buttons.forEach(button => button.removeEventListener("click", playRound))
+}
+
+function playRound(e){
+    const computerSelection = computerPlay();
+    const playerSelection = e.target.id;
+    let winner;
     if (playerSelection === computerSelection) {
-        return "tie";
+        winner = "tie";
     }
     else {
         if ((playerSelection === "rock" && computerSelection === "scissors") ||
             (playerSelection === "scissors" && computerSelection === "paper") ||
             (playerSelection === "paper" && computerSelection === "rock")){
-            return "player";
+            winner = "player";
         }
         else if ((computerSelection === "rock" && playerSelection === "scissors") ||
         (computerSelection === "scissors" && playerSelection === "paper") ||
         (computerSelection === "paper" && playerSelection === "rock")){
-        return "computer";
+            winner = "computer";
         }
         else {
-            return "invalid";
-        }
-    }
-}
-
-function game(){
-    let userScore = 0;
-    let computerScore = 0;
-    let roundWinner;
-    
-    for(let i = 0; i < 5; i++){
-        const userMove = getUserMove();
-        const computerMove = computerPlay();
-        roundWinner = playRound(userMove, computerMove);
-        if (roundWinner === "tie"){
-            console.log(`It is a tie, both players chose ${userMove}`);
-        }
-        else if (roundWinner === "player"){
-            console.log(`You Won! User:${userMove} - Computer:${computerMove}`);
-            userScore++;
-        }
-        else if (roundWinner === "computer"){
-            console.log(`You Lost! User:${userMove} - Computer:${computerMove}`);
-            computerScore++;
-        }
-        else {
-            console.log("You have entered an invalid choice...");
+            winner = "invalid";
         }
     }
 
-    console.log(`----------Results----------\nUser score: ${userScore}\nComputer score: ${computerScore}`);
+    roundNumber++;
+    showRoundResult(playerSelection, computerSelection, winner, roundNumber);
+    updateGlobalScore(winner);
 }
 
-game()
+const buttons = document.querySelectorAll(".option");
+buttons.forEach(button => button.addEventListener("click", playRound))
+let roundNumber = 0;

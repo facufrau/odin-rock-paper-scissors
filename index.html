@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/styles.css">
     <title>Rock Paper Scissors Game</title>
 </head>
 <body>
+    <h1>Rock, Paper and Scissors</h1>
+    <div class="board">
+        <h2>Choose your move</h2>
+        <button type="button" class="option" id="rock">Rock</button>
+        <button type="button" class="option" id="paper">Paper</button>
+        <button type="button" class="option" id="scissors">Scissors</button>
+    </div>
+
+    <div class="round">
+        <h2>Round n°: <span id="round-number"></span></h2>
+        <span id="player-move"></span>
+        <span id="computer-move"></span>
+        <span id="round-winner"></span>
+    </div>
+
+    <div class="scores">
+        <h2>Scores</h2>
+        <p>Player score: <span id="player-score">0</span></p>
+        <p>Computer score: <span id="computer-score">0</span></p>
+        <p>The winner is: <span id="game-winner"></span> </p>
+    </div>
     <script src="src/script.js"></script>
 </body>
 </html>
