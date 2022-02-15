@@ -11,15 +11,17 @@
     <h1>Rock, Paper and Scissors</h1>
     <div class="board">
         <h2>Choose your move</h2>
-        <button type="button" class="option" id="rock">Rock</button>
-        <button type="button" class="option" id="paper">Paper</button>
-        <button type="button" class="option" id="scissors">Scissors</button>
+        <div class="buttons-container">
+            <button type="button" class="option" id="rock">Rock</button>
+            <button type="button" class="option" id="paper">Paper</button>
+            <button type="button" class="option" id="scissors">Scissors</button>
+        </div>
     </div>
 
     <div class="round">
         <h2>Round n°: <span id="round-number"></span></h2>
-        <p>You chose: <span id="player-move"></span></p>
-        <p>The computer chose: <span id="computer-move"></span></p>
+        <p>Your move: <span id="player-move"></span></p>
+        <p>Computer move: <span id="computer-move"></span></p>
         <p>Round winner: <span id="round-winner"></span></p>
     </div>
 
@@ -29,7 +31,10 @@
         <p>Computer score: <span id="computer-score">0</span></p>
         <p>The winner is: <span id="game-winner"></span> </p>
     </div>
-    <button tupe="button" class="hidden" id="reset">Play again</button>
+    <div id="reset-container">
+        <button type="button" class="hidden" id="reset">Play again</button>
+    </div>
+    
     <script src="src/script.js"></script>
 </body>
 </html>
