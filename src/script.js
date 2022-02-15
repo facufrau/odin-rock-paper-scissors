@@ -33,7 +33,10 @@ function updateGlobalScore(winner) {
 function endGame(){
     const buttons = document.querySelectorAll(".option");
     const playAgain = document.getElementById("reset");
-    buttons.forEach(button => button.removeEventListener("click", playRound))
+    buttons.forEach(button => {
+        button.removeEventListener("click", playRound);
+        button.disabled ="true";
+        })
     playAgain.classList.remove("hidden");
 }
 
