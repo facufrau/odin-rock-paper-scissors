@@ -33,11 +33,17 @@ function updateGlobalScore(winner) {
 function endGame(){
     const buttons = document.querySelectorAll(".option");
     const playAgain = document.getElementById("reset");
+    
     buttons.forEach(button => {
         button.removeEventListener("click", playRound);
         button.disabled ="true";
+        button.style.backgroundColor = "#8b8b8b";
         })
     playAgain.classList.remove("hidden");
+
+    const roundInfo = document.querySelector(".round");
+    roundInfo.classList.remove("round");
+    roundInfo.classList.add("hidden");
 }
 
 function playRound(e){
